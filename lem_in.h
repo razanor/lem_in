@@ -14,4 +14,26 @@
 # define LEM_IN_H
 # include "./libft/ft_printf.h"
 
+typedef struct  s_map
+{
+    unsigned short      ants;
+    struct s_rooms      *rooms;
+    struct s_paths      *paths;
+}                       t_map;
+
+typedef struct s_rooms 
+{
+    char                *roomName;
+    unsigned short      x;
+    unsigned short      y;
+    struct s_rooms      *next;
+}                       t_roooms;
+
+typedef struct s_paths
+{
+    unsigned short      from;
+    unsigned short      to;
+    struct s_paths      *next;
+}                       t_paths;
+
 #endif

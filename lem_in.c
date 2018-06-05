@@ -6,14 +6,26 @@
 /*   By: nrepak <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:07:47 by nrepak            #+#    #+#             */
-/*   Updated: 2018/03/20 13:08:04 by nrepak           ###   ########.fr       */
+/*   Updated: 2018/06/05 17:36:38 by nrepak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int	main(void)
+void	error() {
+	ft_printf("ERROR\n");
+	exit(1);
+}	
+
+int		main(void)
 {
-	ft_printf("Are you ready?\n");
-	return 0;
+	int fd;
+	char *str;
+	
+	get_next_line(0, &str);
+
+	ft_putstr(str);
+	return (0);	
+	
 }
+

@@ -30,10 +30,12 @@ typedef struct  s_map
 typedef struct  s_rooms 
 {
     char                *roomName;
+    short               isStart;
+    short               isEnd;
     short               x;
     short               y;
     struct s_rooms      *next;
-}                       t_roooms;
+}                       t_rooms;
 
 typedef struct  s_paths
 {
@@ -57,6 +59,12 @@ void    rooms_validation(t_map *map);
 void    links_validation(t_map *map);
 
 
+/*
+** -------------------------- Data collection Functions -------------------------------
+*/
+
+void    collect_rooms(char *str, t_rooms **rooms, int start, int end);
+
 
 
 /*
@@ -64,5 +72,6 @@ void    links_validation(t_map *map);
 */
 
 int     list_size(t_validMap *validMap);
+int     table_size(char **str);
 
 #endif

@@ -25,3 +25,13 @@ int     list_size(t_validMap *validMap)
     return (i);
 }
 
+int     table_size(char **str)
+{
+    int i;
+
+    i = 0;
+    while(str[i])
+        i++;
+    return (i);
+}
+

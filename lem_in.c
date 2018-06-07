@@ -35,6 +35,15 @@ int		main(void)
 		printf("OK\n");
 	else
 		error();
+	while (map.rooms)
+	{
+		printf("name: %s\n", map.rooms->roomName);
+		printf("x: %d\n", map.rooms->x);
+		printf("y: %d\n", map.rooms->y);
+		printf("start: %d\n", map.rooms->isStart);
+		printf("end: %d\n", map.rooms->isEnd);
+		map.rooms = map.rooms->next;
+	}
 	return (0);	
 }
 

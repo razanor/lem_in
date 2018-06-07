@@ -17,11 +17,11 @@
 typedef struct  s_map
 {
     short               ants;
-    short               antsFlag;
-    short               commentsFlag;
     short               roomsFlag;
-    short               linksFlag;
-    short               noCommentsFlag;
+    short               commandsFlag;
+    short               startFlag;
+    short               endFlag;
+    char                *str;
     struct s_rooms      *rooms;
     struct s_paths      *paths;
     struct s_validMap   *validMap;
@@ -47,5 +47,22 @@ typedef struct  s_validMap
     char                *map;                
     struct s_validMap   *next;
 }                       t_validMap;
+
+/*
+** -------------------------- Validation Functions -------------------------------
+*/
+
+void    comments_validation(t_map *map);
+void    rooms_validation(t_map *map);
+void    links_validation(t_map *map);
+
+
+
+
+/*
+** -------------------------- Auxiliary Functions -------------------------------
+*/
+
+int     list_size(t_validMap *validMap);
 
 #endif

@@ -13,7 +13,7 @@
 NAME = lem-in
 FLAGS = -Wall -Wextra -Werror
 LIB = libftprintf.a
-SRC = lem_in.c
+SRC = lem_in.c auxiliary.c validation.c
 OBJ = $(SRC:.c=.o)
 all: $(NAME)
 

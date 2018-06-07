@@ -16,24 +16,36 @@
 
 typedef struct  s_map
 {
-    unsigned short      ants;
+    short               ants;
+    short               antsFlag;
+    short               commentsFlag;
+    short               roomsFlag;
+    short               linksFlag;
+    short               noCommentsFlag;
     struct s_rooms      *rooms;
     struct s_paths      *paths;
+    struct s_validMap   *validMap;
 }                       t_map;
 
-typedef struct s_rooms 
+typedef struct  s_rooms 
 {
     char                *roomName;
-    unsigned short      x;
-    unsigned short      y;
+    short               x;
+    short               y;
     struct s_rooms      *next;
 }                       t_roooms;
 
-typedef struct s_paths
+typedef struct  s_paths
 {
-    unsigned short      from;
-    unsigned short      to;
+    char                *from;
+    char                *to;
     struct s_paths      *next;
 }                       t_paths;
+
+typedef struct  s_validMap
+{
+    char                *map;                
+    struct s_validMap   *next;
+}                       t_validMap;
 
 #endif

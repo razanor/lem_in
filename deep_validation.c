@@ -1,50 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   auxiliary.c                                        :+:      :+:    :+:   */
+/*   deep_validation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nrepak <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/07 16:50:48 by nrepak            #+#    #+#             */
-/*   Updated: 2018/06/07 16:50:50 by nrepak           ###   ########.fr       */
+/*   Created: 2018/06/08 13:13:33 by nrepak            #+#    #+#             */
+/*   Updated: 2018/06/08 13:13:36 by nrepak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int     list_size(t_validMap *validMap)
+_Bool   unique_rooms(t_rooms **rooms)
 {
-    int i;
+    t_rooms *tmp;
+    t_rooms *tmp2;
 
-    i = 0;
-    while (validMap)
+    tmp = *rooms;
+    tmp2 = *rooms;
+    while (tmp2)
     {
-        validMap = validMap->next;
-        i++;
+        tmp = tmp2;
+        while (tmp->next)
+        {
+            if ((strcmp(tmp->roomName, tmp->next->roomName)) == 0 || (tmp->x == tmp->next->x && tmp->y == tmp->next->y))
+                return (FALSE);
+            tmp = tmp->next;
+        }
+        tmp2 = tmp2->next;
     }
-    return (i);
+    return (TRUE);
 }
 
-int     list_size1(t_rooms *rooms)
-{
-    int i;
-
-    i = 0;
-    while (rooms)
-    {
-        rooms = rooms->next;
-        i++;
-    }
-    return (i);
-}
-
-int     table_size(char **str)
-{
-    int i;
-
-    i = 0;
-    while(str[i])
-        i++;
-    return (i);
-}
 

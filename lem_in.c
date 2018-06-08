@@ -49,7 +49,7 @@ int		main(void)
 		ft_strdel(&(map.str));
 		i++;
 	}
-	if ((list_size(map.validMap)) == i && map.roomsFlag == 1 && map.commandsFlag == 2 && map.startFlag == 0 && map.endFlag == 0)
+	if ((list_size(map.validMap)) == i && map.roomsFlag == 1 && map.commandsFlag == 2 && map.startFlag == 0 && map.endFlag == 0 && unique_rooms(&(map.rooms)))
 		printf("OK\n");
 	else
 		error();

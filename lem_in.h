@@ -12,6 +12,8 @@
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
+# define TRUE 1
+# define FALSE 0
 # include "./libft/ft_printf.h"
 
 typedef struct  s_map
@@ -19,11 +21,12 @@ typedef struct  s_map
     short               ants;
     short               roomsFlag;
     short               commandsFlag;
+    short               linksFlag;
     short               startFlag;
     short               endFlag;
     char                *str;
     struct s_rooms      *rooms;
-    struct s_paths      *paths;
+    struct s_links      *links;
     struct s_validMap   *validMap;
 }                       t_map;
 
@@ -37,12 +40,12 @@ typedef struct  s_rooms
     struct s_rooms      *next;
 }                       t_rooms;
 
-typedef struct  s_paths
+typedef struct  s_links
 {
     char                *from;
     char                *to;
-    struct s_paths      *next;
-}                       t_paths;
+    struct s_links      *next;
+}                       t_links;
 
 typedef struct  s_validMap
 {
@@ -56,7 +59,8 @@ typedef struct  s_validMap
 
 void    comments_validation(t_map *map);
 void    rooms_validation(t_map *map);
-void    links_validation(t_map *map);
+_Bool   links_validation(t_map *map);
+void	enough_data_check(t_links **links);
 
 
 /*
@@ -64,6 +68,7 @@ void    links_validation(t_map *map);
 */
 
 void    collect_rooms(char *str, t_rooms **rooms, int start, int end);
+void	collect_links(char *str, t_links **links);
 
 
 

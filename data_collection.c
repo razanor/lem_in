@@ -28,7 +28,6 @@ void    collect_rooms(char *str, t_rooms **rooms, int start, int end)
 		(*rooms)->isStart = start;
         (*rooms)->isEnd = end;
         (*rooms)->next = NULL;
-        //here
 	}
 	else
 	{
@@ -41,6 +40,31 @@ void    collect_rooms(char *str, t_rooms **rooms, int start, int end)
         tmp->next->y = ft_atoi(table[2]);
         tmp->next->isStart = start;
         tmp->next->isEnd = end;
+		tmp->next->next = NULL;
+	}
+}
+
+void	collect_links(char *str, t_links **links)
+{
+	char 	**table;
+	t_links	*tmp;
+
+	table = ft_strsplit(str, '-');
+	if (!(*links))
+	{
+	     *links = (t_links*)malloc(sizeof(t_links));
+		(*links)->from = ft_strdup(table[0]);
+        (*links)->to = ft_strdup(table[1]);
+        (*links)->next = NULL;
+	}
+	else
+	{
+		tmp = *links;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = (t_links*)malloc(sizeof(t_links));
+		tmp->next->from = ft_strdup(table[0]);
+        tmp->next->to = ft_strdup(table[1]);
 		tmp->next->next = NULL;
 	}
 

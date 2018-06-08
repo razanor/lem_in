@@ -82,19 +82,22 @@ void    rooms_validation(t_map *map)
 			map->commandsFlag++;
 			map->endFlag++;
 		}
+		if (ft_count_char(map->str, '-') == 1 && !ft_count_char(map->str, ' '))
+			map->linksFlag = 1;
+
 	// map->commandsFlag - перевірка чи були ##start i ##end по одному разу на карті
 	// map->roomsFlag - перевірка чи є кімнати на карті
 	// map->startFlag i map->endFlag служать для фіксації start або end кімнати яка йде після одної з команд на випадок якщо після команди йдуть коментарі
 }
 
-void    links_validation(t_map *map)
+_Bool  links_validation(t_map *map)
 {
-    char **str;
-
 	if (ft_count_char(map->str, '-') == 1 && !ft_count_char(map->str, ' '))
     {
-        str = ft_strsplit(map->str, '-');
-        if ((table_size(str)) == 2)
-		    mapSaver(&map);
+		 collect_links(map->str, &(map->links));
+		 mapSaver(&map);
     }
+	else
+		return (FALSE);
+	return (TRUE);
 }

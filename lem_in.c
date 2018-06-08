@@ -17,47 +17,34 @@ void	error() {
 	exit(1);
 }	
 
-void	enough_data_check(t_links **links, int i, int len)
+void	enough_data_check(t_links **links)
 {
-	if (i == len)
-	{
-		while (*links)
+	t_links *tmp;
+
+	tmp = *links;
+		while (tmp)
 		{
-			printf("%s", (*links)->from);
+			printf("%s", tmp->from);
 			printf("-");
-			printf("%s\n", (*links)->to);
-			*links = (*links)->next;
+			printf("%s\n", tmp->to);
+			tmp = tmp->next;
 		}
+		if (!(*links))
+			error();
 		printf("Here will be logic soon!\n");
-		}
-	else
-		error();
 	exit (1);
 }
 
 int		main(void)
 {
 	t_map 	map;
-	int		i;
 
-	i = 0;
-	map = (t_map){0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL};
+	map = (t_map){0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL};
 	while (get_next_line(0, &(map.str)))
 	{
-		comments_validation(&map);
-		rooms_validation(&map);
-		if (map.linksFlag == 1)
-		{
-			if (!links_validation(&map))
-				enough_data_check(&(map.links), i, list_size(map.validMap));
-		}
+		line_analyzer(&map);
 		ft_strdel(&(map.str));
-		i++;
 	}
-	if ((list_size(map.validMap)) == i && map.roomsFlag == 1 && map.commandsFlag == 2 && map.startFlag == 0 && map.endFlag == 0)
-		printf("OK\n");
-	else
-		error();
 	// while (map.rooms)
 	// {
 	// 	printf("name: %s\n", map.rooms->roomName);

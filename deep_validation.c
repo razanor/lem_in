@@ -19,12 +19,14 @@ void   unique_rooms(t_rooms **rooms)
 
     tmp = *rooms;
     tmp2 = *rooms;
+    if (tmp2->x < 0 || tmp2->y < 0)
+        error();
     while (tmp2)
     {
         tmp = tmp2->next;
         while (tmp)
         {
-            if ((strcmp(tmp2->roomName, tmp->roomName)) == 0 || (tmp2->x == tmp->x && tmp2->y == tmp->y))
+            if ((strcmp(tmp2->roomName, tmp->roomName)) == 0 || (tmp2->x == tmp->x && tmp2->y == tmp->y) || (tmp2->x < 0 || tmp2->y < 0))
                 error();
             tmp = tmp->next;
         }

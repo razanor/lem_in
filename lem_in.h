@@ -20,7 +20,8 @@ typedef struct  s_map
 {
     short               ants;
     short               roomsFlag;
-    short               commandsFlag;
+    short               commandsStartFlag;
+    short               commandsEndFlag;
     short               linksFlag;
     short               startFlag;
     short               endFlag;
@@ -57,12 +58,13 @@ typedef struct  s_validMap
 ** -------------------------- Validation Functions -------------------------------
 */
 
-void    comments_validation(t_map *map);
+void    line_analyzer(t_map *map);
 void    rooms_validation(t_map *map);
 _Bool   links_validation(t_map *map);
-void	enough_data_check(t_links **links, int i, int len);
-void   unique_rooms(t_rooms **rooms);
+void	enough_data_check(t_links **links);
+void    unique_rooms(t_rooms **rooms);
 _Bool   isRooms(char *str, t_rooms *rooms);
+
 
 
 /*

@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-_Bool   unique_rooms(t_rooms **rooms)
+void   unique_rooms(t_rooms **rooms)
 {
     t_rooms *tmp;
     t_rooms *tmp2;
@@ -21,16 +21,37 @@ _Bool   unique_rooms(t_rooms **rooms)
     tmp2 = *rooms;
     while (tmp2)
     {
-        tmp = tmp2;
-        while (tmp->next)
+        tmp = tmp2->next;
+        while (tmp)
         {
-            if ((strcmp(tmp->roomName, tmp->next->roomName)) == 0 || (tmp->x == tmp->next->x && tmp->y == tmp->next->y))
-                return (FALSE);
+            if ((strcmp(tmp2->roomName, tmp->roomName)) == 0 || (tmp2->x == tmp->x && tmp2->y == tmp->y))
+                error();
             tmp = tmp->next;
         }
         tmp2 = tmp2->next;
     }
-    return (TRUE);
+}
+
+_Bool   isRooms(char *str, t_rooms *rooms)
+{
+    char    **table;
+    int     flag;
+
+    flag = 0;
+    table = ft_strsplit(str, '-');
+    if (strcmp(table[0], table[1]) == 0)
+        return (FALSE);
+    while (rooms)
+    {
+        if (strcmp(rooms->roomName, table[0]) == 0)
+            flag++;
+        if (strcmp(rooms->roomName, table[1]) == 0)
+            flag++;
+        rooms = rooms->next;
+    }
+    if (flag == 2)
+        return (TRUE);
+    return (FALSE);
 }
 
 

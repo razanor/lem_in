@@ -12,21 +12,26 @@
 
 #include "lem_in.h"
 
-static 	void	error() {
+void	error() {
 	ft_printf("ERROR\n");
 	exit(1);
 }	
 
-void	enough_data_check(t_links **links)
+void	enough_data_check(t_links **links, int i, int len)
 {
-		while (*links)
+	if (i == len)
 	{
-		printf("%s", (*links)->from);
-		printf("-");
-		printf("%s\n", (*links)->to);
-		*links = (*links)->next;
-	}
-	printf("Here will be logic soon!\n");
+		while (*links)
+		{
+			printf("%s", (*links)->from);
+			printf("-");
+			printf("%s\n", (*links)->to);
+			*links = (*links)->next;
+		}
+		printf("Here will be logic soon!\n");
+		}
+	else
+		error();
 	exit (1);
 }
 
@@ -44,12 +49,12 @@ int		main(void)
 		if (map.linksFlag == 1)
 		{
 			if (!links_validation(&map))
-				enough_data_check(&(map.links));
+				enough_data_check(&(map.links), i, list_size(map.validMap));
 		}
 		ft_strdel(&(map.str));
 		i++;
 	}
-	if ((list_size(map.validMap)) == i && map.roomsFlag == 1 && map.commandsFlag == 2 && map.startFlag == 0 && map.endFlag == 0 && unique_rooms(&(map.rooms)))
+	if ((list_size(map.validMap)) == i && map.roomsFlag == 1 && map.commandsFlag == 2 && map.startFlag == 0 && map.endFlag == 0)
 		printf("OK\n");
 	else
 		error();

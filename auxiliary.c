@@ -25,19 +25,6 @@ int     list_size(t_validMap *validMap)
     return (i);
 }
 
-int     list_size1(t_rooms *rooms)
-{
-    int i;
-
-    i = 0;
-    while (rooms)
-    {
-        rooms = rooms->next;
-        i++;
-    }
-    return (i);
-}
-
 int     table_size(char **str)
 {
     int i;

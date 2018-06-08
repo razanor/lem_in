@@ -75,6 +75,7 @@ void    rooms_validation(t_map *map)
 				mapSaver(&map);
 				map->roomsFlag = 1;
                 collect_rooms(map->str, &(map->rooms), start, end);
+				unique_rooms(&(map->rooms));
 			}
 		if (strcmp(map->str, "##end") == 0)
 		{
@@ -94,8 +95,13 @@ _Bool  links_validation(t_map *map)
 {
 	if (ft_count_char(map->str, '-') == 1 && !ft_count_char(map->str, ' '))
     {
-		 collect_links(map->str, &(map->links));
-		 mapSaver(&map);
+		if (isRooms(map->str, map->rooms))
+		{
+			collect_links(map->str, &(map->links));
+			mapSaver(&map);
+		}
+		else
+			return (FALSE);
     }
 	else
 		return (FALSE);

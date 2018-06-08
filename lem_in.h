@@ -60,8 +60,9 @@ typedef struct  s_validMap
 void    comments_validation(t_map *map);
 void    rooms_validation(t_map *map);
 _Bool   links_validation(t_map *map);
-void	enough_data_check(t_links **links);
-_Bool   unique_rooms(t_rooms **rooms);
+void	enough_data_check(t_links **links, int i, int len);
+void   unique_rooms(t_rooms **rooms);
+_Bool   isRooms(char *str, t_rooms *rooms);
 
 
 /*
@@ -78,7 +79,7 @@ void	collect_links(char *str, t_links **links);
 */
 
 int     list_size(t_validMap *validMap);
-int     list_size1(t_rooms *rooms);
 int     table_size(char **str);
+void    error();
 
 #endif

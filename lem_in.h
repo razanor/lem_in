@@ -60,8 +60,8 @@ typedef struct			s_valid_map
 */
 
 void					line_analyzer(t_map *map);
-void					enough_data_check(t_links **links);
-void					unique_rooms(t_rooms **rooms);
+void					enough_data_check(t_links **links, t_map *map);
+void					unique_rooms(t_rooms **rooms, t_map *map);
 _Bool					is_rooms(char *str, t_rooms *rooms, short *s, short *e);
 
 /*
@@ -69,8 +69,7 @@ _Bool					is_rooms(char *str, t_rooms *rooms, short *s, short *e);
 */
 
 void					map_saver(t_map *map);
-void					collect_rooms(char *str, t_rooms **rooms,
-						int start, int end);
+void					collect_rooms(t_map *map, int start, int end);
 void					collect_links(char *str, t_links **links);
 
 /*
@@ -79,6 +78,7 @@ void					collect_links(char *str, t_links **links);
 
 int						list_size(t_valid_map *valid_map);
 int						table_size(char **str);
-void					error();
+void					error(t_map *map);
+void    				table_clean(char **table);
 
 #endif

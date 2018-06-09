@@ -20,7 +20,7 @@ static	void	ants_validation(t_map *map)
 		map_saver(map);
 	}
 	else
-		error();
+		error(map);
 }
 
 static	void	start_validation(t_map *map)
@@ -31,10 +31,10 @@ static	void	start_validation(t_map *map)
 		map->com_start_flag++;
 		map->start_flag = 2;
 		if (map->com_start_flag > 1)
-			error();
+			error(map);
 	}
 	else
-		error();
+		error(map);
 }
 
 static	void	rooms_validation(t_map *map)
@@ -56,8 +56,8 @@ static	void	rooms_validation(t_map *map)
 	}
 	map_saver(map);
 	map->rooms_flag = 1;
-	collect_rooms(map->str, &(map->rooms), start, end);
-	unique_rooms(&(map->rooms));
+	collect_rooms(map, start, end);
+	unique_rooms(&(map->rooms), map);
 }
 
 static	void	links_validation(t_map *map)
@@ -68,7 +68,7 @@ static	void	links_validation(t_map *map)
 		map_saver(map);
 	}
 	else if (map->start_flag == 1 && map->end_flag == 1)
-		enough_data_check(&(map->links));
+		enough_data_check(&(map->links), map);
 }
 
 void			line_analyzer(t_map *map)
@@ -91,13 +91,13 @@ void			line_analyzer(t_map *map)
 		map->com_end_flag++;
 		map->end_flag = 2;
 		if (map->com_end_flag > 1)
-			error();
+			error(map);
 	}
 	else if (ft_count_char(map->str, '-') == 1 && !ft_count_char(map->str, ' ')
 	&& map->rooms_flag == 1 && map->com_start_flag == 1 && map->com_end_flag == 1)
 		links_validation(map);
 	else
-		error();
+		error(map);
 	// map->commandsFlag - перевірка чи були ##start i ##end по одному разу на карті
 	// map->rooms_flag - перевірка чи є кімнати на карті
 	// map->start_flag i map->end_flag служать для фіксації start або end кімнати яка йде після одної з команд на випадок якщо після команди йдуть коментарі

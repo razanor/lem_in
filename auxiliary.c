@@ -25,6 +25,19 @@ int     list_size(t_valid_map *valid_map)
     return (i);
 }
 
+void    table_clean(char **table)
+{
+	int i;
+
+	i = 0;
+	while (table[i])
+	{
+		ft_strdel(&table[i]);
+		i++;
+	}
+	free(table);
+}
+
 int     table_size(char **str)
 {
     int i;

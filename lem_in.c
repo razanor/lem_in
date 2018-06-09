@@ -12,12 +12,63 @@
 
 #include "lem_in.h"
 
-void	error() {
+static	void	rooms_clean(t_rooms **rooms)
+{
+	t_rooms *tmp;
+
+	while (*rooms)
+	{
+		ft_strdel(&((*rooms)->room_name));
+		tmp = *rooms;
+		*rooms = (*rooms)->next;
+		free(tmp);
+	}
+}
+
+static	void	map_clean(t_valid_map **valid_map)
+{
+	t_valid_map *tmp;
+
+	while (*valid_map)
+	{
+		ft_strdel(&((*valid_map)->map));
+		tmp = *valid_map;
+		*valid_map = (*valid_map)->next;
+		free(tmp);
+	}
+}
+
+static	void	links_clean(t_links **links)
+{
+	t_links *tmp;
+
+	while (*links)
+	{
+		ft_strdel(&((*links)->from));
+		ft_strdel(&((*links)->to));
+		tmp = *links;
+		*links = (*links)->next;
+		free(tmp);
+	}
+}
+
+void	error(t_map *map) {
+
+	
+
 	ft_printf("ERROR\n");
+	if (map->str)
+		ft_strdel(&(map->str));
+	if (map->rooms)
+		rooms_clean(&(map->rooms));
+	if (map->links)
+		links_clean(&(map->links));
+	if (map->valid_map)
+		map_clean(&(map->valid_map));
 	exit(1);
 }	
 
-void	enough_data_check(t_links **links)
+void	enough_data_check(t_links **links, t_map *map)
 {
 	t_links *tmp;
 
@@ -30,7 +81,7 @@ void	enough_data_check(t_links **links)
 			tmp = tmp->next;
 		}
 		if (!(*links))
-			error();
+			error(map);
 		printf("Here will be logic soon!\n");
 	exit (1);
 }
@@ -46,7 +97,7 @@ int		main(void)
 		ft_strdel(&(map.str));
 	}
 	if (map.links_end == 0 || map.links_start == 0)
-		error();
+		error(&map);
 		while (map.valid_map)
 	{
 		printf("%s\n", map.valid_map->map);

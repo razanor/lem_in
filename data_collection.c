@@ -26,22 +26,6 @@ static int		is_digit(char *str)
 	return (1);
 }
 
-static void		collect_rooms2(int s, int end, t_rooms **rooms, char **table)
-{
-	t_rooms *tmp;
-
-	tmp = *rooms;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = (t_rooms*)malloc(sizeof(t_rooms));
-	tmp->next->room_name = ft_strdup(table[0]);
-	tmp->next->x = ft_atoi(table[1]);
-	tmp->next->y = ft_atoi(table[2]);
-	tmp->next->is_start = s;
-	tmp->next->is_end = end;
-	tmp->next->next = NULL;
-}
-
 void			map_saver(t_map *map)
 {
 	t_valid_map *tmp;
@@ -63,26 +47,43 @@ void			map_saver(t_map *map)
 	}
 }
 
-void			collect_rooms(char *str, t_rooms **rooms, int start, int end)
+static void		collect_rooms2(int s, int end, t_map *map, char **table)
+{
+	t_rooms *tmp;
+
+	tmp = map->rooms;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = (t_rooms*)malloc(sizeof(t_rooms));
+	tmp->next->room_name = ft_strdup(table[0]);
+	tmp->next->x = ft_atoi(table[1]);
+	tmp->next->y = ft_atoi(table[2]);
+	tmp->next->is_start = s;
+	tmp->next->is_end = end;
+	tmp->next->next = NULL;
+}
+
+void			collect_rooms(t_map *map, int start, int end)
 {
 	char	**table;
 
-	table = ft_strsplit(str, ' ');
+	table = ft_strsplit(map->str, ' ');
 	if (!(atoi(table[1]) >= 0 && (atoi(table[2]) >= 0) && is_digit(table[1])
 	&& is_digit(table[2])))
-		error();
-	if (!(*rooms))
+		error(map);
+	if (!(map->rooms))
 	{
-		*rooms = (t_rooms*)malloc(sizeof(t_rooms));
-		(*rooms)->room_name = ft_strdup(table[0]);
-		(*rooms)->x = ft_atoi(table[1]);
-		(*rooms)->y = ft_atoi(table[2]);
-		(*rooms)->is_start = start;
-		(*rooms)->is_end = end;
-		(*rooms)->next = NULL;
+		map->rooms = (t_rooms*)malloc(sizeof(t_rooms));
+		map->rooms->room_name = ft_strdup(table[0]);
+		map->rooms->x = ft_atoi(table[1]);
+		map->rooms->y = ft_atoi(table[2]);
+		map->rooms->is_start = start;
+		map->rooms->is_end = end;
+		map->rooms->next = NULL;
 	}
 	else
-		collect_rooms2(start, end, rooms, table);
+		collect_rooms2(start, end, map, table);
+	table_clean(table);
 }
 
 void			collect_links(char *str, t_links **links)
@@ -108,4 +109,5 @@ void			collect_links(char *str, t_links **links)
 		tmp->next->to = ft_strdup(table[1]);
 		tmp->next->next = NULL;
 	}
+	table_clean(table);
 }

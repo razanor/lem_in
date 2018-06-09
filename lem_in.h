@@ -19,22 +19,22 @@
 typedef struct			s_map
 {
 	short				ants;
-	short				roomsFlag;
-	short				comStartFlag;
-	short				comEndFlag;
-	short				startFlag;
-	short				endFlag;
+	short				rooms_flag;
+	short				com_start_flag;
+	short				com_end_flag;
+	short				start_flag;
+	short				end_flag;
 	char				*str;
 	struct s_rooms		*rooms;
 	struct s_links		*links;
-	struct s_validMap	*validMap;
+	struct s_valid_map	*valid_map;
 }						t_map;
 
 typedef struct			s_rooms
 {
-	char				*roomName;
-	short				isStart;
-	short				isEnd;
+	char				*room_name;
+	short				is_start;
+	short				is_end;
 	short				x;
 	short				y;
 	struct s_rooms		*next;
@@ -47,11 +47,11 @@ typedef struct			s_links
 	struct s_links		*next;
 }						t_links;
 
-typedef struct			s_validMap
+typedef struct			s_valid_map
 {
 	char				*map;
-	struct s_validMap	*next;
-}						t_validMap;
+	struct s_valid_map	*next;
+}						t_valid_map;
 
 /*
 ** -------------------------- Validation Functions ----------------------------
@@ -72,10 +72,10 @@ void					collect_rooms(char *str, t_rooms **rooms,
 void					collect_links(char *str, t_links **links);
 
 /*
-** -------------------------- Auxiliary Functions -----------------------------
+** -------------------------- Auxiliary Functions ------------------------------
 */
 
-int						list_size(t_validMap *validMap);
+int						list_size(t_valid_map *valid_map);
 int						table_size(char **str);
 void					error();
 

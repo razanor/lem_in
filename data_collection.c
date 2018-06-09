@@ -34,30 +34,30 @@ static void		collect_rooms2(int s, int end, t_rooms **rooms, char **table)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = (t_rooms*)malloc(sizeof(t_rooms));
-	tmp->next->roomName = ft_strdup(table[0]);
+	tmp->next->room_name = ft_strdup(table[0]);
 	tmp->next->x = ft_atoi(table[1]);
 	tmp->next->y = ft_atoi(table[2]);
-	tmp->next->isStart = s;
-	tmp->next->isEnd = end;
+	tmp->next->is_start = s;
+	tmp->next->is_end = end;
 	tmp->next->next = NULL;
 }
 
 void			map_saver(t_map *map)
 {
-	t_validMap *tmp;
+	t_valid_map *tmp;
 
-	if (!(map->validMap))
+	if (!(map->valid_map))
 	{
-		map->validMap = (t_validMap*)malloc(sizeof(t_validMap));
-		map->validMap->map = ft_strdup(map->str);
-		map->validMap->next = NULL;
+		map->valid_map = (t_valid_map*)malloc(sizeof(t_valid_map));
+		map->valid_map->map = ft_strdup(map->str);
+		map->valid_map->next = NULL;
 	}
 	else
 	{
-		tmp = map->validMap;
+		tmp = map->valid_map;
 		while (tmp->next)
 			tmp = tmp->next;
-		tmp->next = (t_validMap*)malloc(sizeof(t_validMap));
+		tmp->next = (t_valid_map*)malloc(sizeof(t_valid_map));
 		tmp->next->map = ft_strdup(map->str);
 		tmp->next->next = NULL;
 	}
@@ -74,11 +74,11 @@ void			collect_rooms(char *str, t_rooms **rooms, int start, int end)
 	if (!(*rooms))
 	{
 		*rooms = (t_rooms*)malloc(sizeof(t_rooms));
-		(*rooms)->roomName = ft_strdup(table[0]);
+		(*rooms)->room_name = ft_strdup(table[0]);
 		(*rooms)->x = ft_atoi(table[1]);
 		(*rooms)->y = ft_atoi(table[2]);
-		(*rooms)->isStart = start;
-		(*rooms)->isEnd = end;
+		(*rooms)->is_start = start;
+		(*rooms)->is_end = end;
 		(*rooms)->next = NULL;
 	}
 	else

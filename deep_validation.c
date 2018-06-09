@@ -26,7 +26,7 @@ void	unique_rooms(t_rooms **rooms)
 		tmp = tmp2->next;
 		while (tmp)
 		{
-			if ((strcmp(tmp2->roomName, tmp->roomName)) == 0 || (tmp2->x ==
+			if ((strcmp(tmp2->room_name, tmp->room_name)) == 0 || (tmp2->x ==
 			tmp->x && tmp2->y == tmp->y) || (tmp2->x < 0 || tmp2->y < 0))
 				error();
 			tmp = tmp->next;
@@ -46,9 +46,9 @@ _Bool	is_rooms(char *str, t_rooms *rooms)
 		return (FALSE);
 	while (rooms && table[0] && table[1])
 	{
-		if (strcmp(rooms->roomName, table[0]) == 0)
+		if (strcmp(rooms->room_name, table[0]) == 0)
 			flag++;
-		if (strcmp(rooms->roomName, table[1]) == 0)
+		if (strcmp(rooms->room_name, table[1]) == 0)
 			flag++;
 		rooms = rooms->next;
 	}

@@ -45,10 +45,10 @@ int		main(void)
 		line_analyzer(&map);
 		ft_strdel(&(map.str));
 	}
-	while (map.validMap)
+	while (map.valid_map)
 	{
-		printf("%s\n", map.validMap->map);
-		map.validMap = map.validMap->next;
+		printf("%s\n", map.valid_map->map);
+		map.valid_map = map.valid_map->next;
 	}
 	// while (map.rooms)
 	// {

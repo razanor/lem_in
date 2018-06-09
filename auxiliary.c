@@ -12,14 +12,14 @@
 
 #include "lem_in.h"
 
-int     list_size(t_validMap *validMap)
+int     list_size(t_valid_map *valid_map)
 {
     int i;
 
     i = 0;
-    while (validMap)
+    while (valid_map)
     {
-        validMap = validMap->next;
+        valid_map = valid_map->next;
         i++;
     }
     return (i);

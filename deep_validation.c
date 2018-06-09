@@ -12,48 +12,47 @@
 
 #include "lem_in.h"
 
-void   unique_rooms(t_rooms **rooms)
+void	unique_rooms(t_rooms **rooms)
 {
-    t_rooms *tmp;
-    t_rooms *tmp2;
+	t_rooms		*tmp;
+	t_rooms		*tmp2;
 
-    tmp = *rooms;
-    tmp2 = *rooms;
-    if (tmp2->x < 0 || tmp2->y < 0)
-        error();
-    while (tmp2)
-    {
-        tmp = tmp2->next;
-        while (tmp)
-        {
-            if ((strcmp(tmp2->roomName, tmp->roomName)) == 0 || (tmp2->x == tmp->x && tmp2->y == tmp->y) || (tmp2->x < 0 || tmp2->y < 0))
-                error();
-            tmp = tmp->next;
-        }
-        tmp2 = tmp2->next;
-    }
+	tmp = *rooms;
+	tmp2 = *rooms;
+	if (tmp2->x < 0 || tmp2->y < 0)
+		error();
+	while (tmp2)
+	{
+		tmp = tmp2->next;
+		while (tmp)
+		{
+			if ((strcmp(tmp2->roomName, tmp->roomName)) == 0 || (tmp2->x ==
+			tmp->x && tmp2->y == tmp->y) || (tmp2->x < 0 || tmp2->y < 0))
+				error();
+			tmp = tmp->next;
+		}
+		tmp2 = tmp2->next;
+	}
 }
 
-_Bool   isRooms(char *str, t_rooms *rooms)
+_Bool	is_rooms(char *str, t_rooms *rooms)
 {
-    char    **table;
-    int     flag;
+	char	**table;
+	int		flag;
 
-    flag = 0;
-    table = ft_strsplit(str, '-');
-    if (strcmp(table[0], table[1]) == 0)
-        return (FALSE);
-    while (rooms)
-    {
-        if (strcmp(rooms->roomName, table[0]) == 0)
-            flag++;
-        if (strcmp(rooms->roomName, table[1]) == 0)
-            flag++;
-        rooms = rooms->next;
-    }
-    if (flag == 2)
-        return (TRUE);
-    return (FALSE);
+	flag = 0;
+	table = ft_strsplit(str, '-');
+	if (table[0] && table[1] && strcmp(table[0], table[1]) == 0)
+		return (FALSE);
+	while (rooms && table[0] && table[1])
+	{
+		if (strcmp(rooms->roomName, table[0]) == 0)
+			flag++;
+		if (strcmp(rooms->roomName, table[1]) == 0)
+			flag++;
+		rooms = rooms->next;
+	}
+	if (flag == 2)
+		return (TRUE);
+	return (FALSE);
 }
-
-

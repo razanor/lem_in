@@ -39,13 +39,15 @@ int		main(void)
 {
 	t_map 	map;
 
-	map = (t_map){0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL};
+	map = (t_map){0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL};
 	while (get_next_line(0, &(map.str)))
 	{
 		line_analyzer(&map);
 		ft_strdel(&(map.str));
 	}
-	while (map.valid_map)
+	if (map.links_end == 0 || map.links_start == 0)
+		error();
+		while (map.valid_map)
 	{
 		printf("%s\n", map.valid_map->map);
 		map.valid_map = map.valid_map->next;

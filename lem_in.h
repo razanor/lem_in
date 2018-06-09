@@ -24,6 +24,8 @@ typedef struct			s_map
 	short				com_end_flag;
 	short				start_flag;
 	short				end_flag;
+	short				links_end;
+	short				links_start;
 	char				*str;
 	struct s_rooms		*rooms;
 	struct s_links		*links;
@@ -60,7 +62,7 @@ typedef struct			s_valid_map
 void					line_analyzer(t_map *map);
 void					enough_data_check(t_links **links);
 void					unique_rooms(t_rooms **rooms);
-_Bool					is_rooms(char *str, t_rooms *rooms);
+_Bool					is_rooms(char *str, t_rooms *rooms, short *s, short *e);
 
 /*
 ** -------------------------- Data collection Functions -----------------------

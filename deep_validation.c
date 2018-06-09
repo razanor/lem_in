@@ -35,7 +35,7 @@ void	unique_rooms(t_rooms **rooms)
 	}
 }
 
-_Bool	is_rooms(char *str, t_rooms *rooms)
+_Bool	is_rooms(char *str, t_rooms *rooms, short *s, short *e)
 {
 	char	**table;
 	int		flag;
@@ -46,6 +46,12 @@ _Bool	is_rooms(char *str, t_rooms *rooms)
 		return (FALSE);
 	while (rooms && table[0] && table[1])
 	{
+		if (rooms->is_start == 1 && (!strcmp(table[0], rooms->room_name)
+		|| !strcmp(table[1], rooms->room_name)))
+			(*s)++;
+		if (rooms->is_end == 1 && (!strcmp(table[0], rooms->room_name)
+		|| !strcmp(table[1], rooms->room_name)))
+			(*e)++;
 		if (strcmp(rooms->room_name, table[0]) == 0)
 			flag++;
 		if (strcmp(rooms->room_name, table[1]) == 0)

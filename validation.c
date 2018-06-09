@@ -62,7 +62,7 @@ static	void	rooms_validation(t_map *map)
 
 static	void	links_validation(t_map *map)
 {
-	if (is_rooms(map->str, map->rooms))
+	if (is_rooms(map->str, map->rooms, &(map->links_start), &(map->links_end)))
 	{
 		collect_links(map->str, &(map->links));
 		map_saver(map);

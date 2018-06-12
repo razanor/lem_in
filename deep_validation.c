@@ -17,7 +17,6 @@ void	unique_rooms(t_rooms **rooms, t_map *map)
 	t_rooms		*tmp;
 	t_rooms		*tmp2;
 
-	tmp = *rooms;
 	tmp2 = *rooms;
 	if (tmp2->x < 0 || tmp2->y < 0)
 		error(map);

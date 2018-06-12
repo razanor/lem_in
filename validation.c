@@ -97,7 +97,7 @@ void			line_analyzer(t_map *map)
 	&& map->rooms_flag == 1 && map->com_start_flag == 1 && map->com_end_flag == 1)
 		links_validation(map);
 	else
-		error(map);
+		enough_data_check(&(map->links), map);
 	// map->commandsFlag - перевірка чи були ##start i ##end по одному разу на карті
 	// map->rooms_flag - перевірка чи є кімнати на карті
 	// map->start_flag i map->end_flag служать для фіксації start або end кімнати яка йде після одної з команд на випадок якщо після команди йдуть коментарі

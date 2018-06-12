@@ -98,18 +98,17 @@ int		main(void)
 	}
 	if (map.links_end == 0 || map.links_start == 0)
 		error(&map);
-		while (map.valid_map)
-	{
-		printf("%s\n", map.valid_map->map);
-		map.valid_map = map.valid_map->next;
-	}
+	rooms_to_index(&map);
+	if (map.valid_map)
+		printf("Ok\n");
 	// while (map.rooms)
 	// {
-	// 	printf("name: %s\n", map.rooms->roomName);
+	// 	printf("name: %s\n", map.rooms->room_name);
+	// 	printf("room_index: %d\n", map.rooms->room_index);
 	// 	printf("x: %d\n", map.rooms->x);
 	// 	printf("y: %d\n", map.rooms->y);
-	// 	printf("start: %d\n", map.rooms->isStart);
-	// 	printf("end: %d\n", map.rooms->isEnd);
+	// 	printf("startFLag: %d\n", map.rooms->is_start);
+	// 	printf("endFlag: %d\n", map.rooms->is_end);
 	// 	map.rooms = map.rooms->next;
 	// }
 	// 	while (map.links)

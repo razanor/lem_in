@@ -47,4 +47,27 @@ int     table_size(char **str)
         i++;
     return (i);
 }
+ 
+int     **create_matrix(int len)
+{
+    int **mat;
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    mat = (int **)malloc(sizeof(int *) * len);
+    while (i < len)
+    {
+        j = 0;
+        while (j < len)
+        {
+            mat[i] = (int *)malloc(sizeof(int) * len);
+            mat[i][j] = 0;
+            j++;
+        }
+        i++;
+    }
+    return (mat);
+}
 

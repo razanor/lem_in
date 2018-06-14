@@ -12,13 +12,21 @@
 
 #include "lem_in.h"
 
-void    rooms_to_index(t_map *map)
+static void initialized_matrix(int **mat, t_links *links)
+{
+     while (links)
+    {
+        mat[links->from_index][links->to_index] = 1;
+        mat[links->to_index][links->from_index] = 1;
+        links = links->next;
+    }
+}
+
+void    adjacency_matrix(t_map *map)
 {
     t_rooms *tmp;
     t_links *tmp2;
-    int     len;
 
-    len = 0;
     tmp = map->rooms;
     while (tmp)
     {
@@ -28,64 +36,58 @@ void    rooms_to_index(t_map *map)
             if (ft_strcmp(tmp->room_name, tmp2->from) == 0)
                 tmp2->from_index = tmp->room_index;
             else if (ft_strcmp(tmp->room_name, tmp2->to) == 0)
-                tmp2->to_index = tmp->room_index;
-                tmp2 = tmp2->next;
+                tmp2->to_index = tmp->room_index;    
+            tmp2 = tmp2->next;
         }
-        len++;
+        map->mat_len++;
         tmp = tmp->next;
     }
-    // while (map->links)
-    // {
-    //     printf("%d", map->links->from_index);
-    //     printf("-");
-    //     printf("%d\n", map->links->to_index);
-    //     map->links = map->links->next;
-    // }
-    adjacency_matrix(map, len);
+    map->mat = create_matrix(map->mat_len);
+    initialized_matrix(map->mat, map->links);
 }
 
-void    adjacency_matrix(t_map *map, int len)
-{
-    int **mat;
-    int i;
-    int j;
-    t_links *tmp;
+// void    adjacency_matrix(t_map *map, int len)
+// {
+//     int **mat;
+//     int i;
+//     int j;
+//     t_links *tmp;
 
-    i = 0;
-    j = 0;
-    mat = (int **)malloc(sizeof(int *) * len); // here
-    while (i < len)
-    {
-        j = 0;
-        while (j < len)
-        {
-            mat[i] = (int *)malloc(sizeof(int) * len);
-            mat[i][j] = 0;
-            j++;
-        }
-        i++;
-    }
-    tmp = map->links;
-    while (tmp)
-    {
-        mat[tmp->from_index][tmp->to_index] = 1;
-        mat[tmp->to_index][tmp->from_index] = 1;
+//     i = 0;
+//     j = 0;
+//     mat = (int **)malloc(sizeof(int *) * len); // here
+//     while (i < len)
+//     {
+//         j = 0;
+//         while (j < len)
+//         {
+//             mat[i] = (int *)malloc(sizeof(int) * len);
+//             mat[i][j] = 0;
+//             j++;
+//         }
+//         i++;
+//     }
+//     tmp = map->links;
+//     while (tmp)
+//     {
+//         mat[tmp->from_index][tmp->to_index] = 1;
+//         mat[tmp->to_index][tmp->from_index] = 1;
 
-        tmp = tmp->next;
-    }
-    i = 0;
-    j = 0;
-    while (i < len)
-    {
-        j = 0;
-        while (j < len)
-        {
-            printf("%d", mat[i][j]);
-            j++;
-        }
-        printf("\n");
-        i++;
-    }
-    // here
+//         tmp = tmp->next;
+//     }
+//     i = 0;
+//     j = 0;
+//     while (i < len)
+//     {
+//         j = 0;
+//         while (j < len)
+//         {
+//             printf("%d", mat[i][j]);
+//             j++;
+//         }
+//         printf("\n");
+//         i++;
+//     }
+//     // here
 
-}
+// }

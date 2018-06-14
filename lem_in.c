@@ -52,11 +52,8 @@ static	void	links_clean(t_links **links)
 	}
 }
 
-void	error(t_map *map) {
-
-	
-
-	ft_printf("ERROR\n");
+void	error(t_map *map) 
+{
 	if (map->str)
 		ft_strdel(&(map->str));
 	if (map->rooms)
@@ -65,6 +62,7 @@ void	error(t_map *map) {
 		links_clean(&(map->links));
 	if (map->valid_map)
 		map_clean(&(map->valid_map));
+	ft_printf("ERROR\n");
 	exit(1);
 }	
 
@@ -90,7 +88,7 @@ int		main(void)
 {
 	t_map 	map;
 
-	map = (t_map){0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL};
+	map = (t_map){0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL};
 	while (get_next_line(0, &(map.str)))
 	{
 		line_analyzer(&map);
@@ -98,7 +96,21 @@ int		main(void)
 	}
 	if (map.links_end == 0 || map.links_start == 0)
 		error(&map);
-	rooms_to_index(&map);
+	adjacency_matrix(&map);
+	int i = 0;
+	int	j = 0;
+    while (i < map.mat_len)
+    {
+        j = 0;
+        while (j < map.mat_len)
+        {
+            printf("%d", map.mat[i][j]);
+            j++;
+        }
+        printf("\n");
+        i++;
+    }
+	// here
 	if (map.valid_map)
 		printf("Ok\n");
 	// while (map.rooms)

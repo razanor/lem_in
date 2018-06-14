@@ -26,7 +26,9 @@ typedef struct			s_map
 	short				end_flag;
 	short				links_end;
 	short				links_start;
+	short				mat_len;
 	char				*str;
+	int					**mat;
 	struct s_rooms		*rooms;
 	struct s_links		*links;
 	struct s_valid_map	*valid_map;
@@ -83,13 +85,15 @@ int						list_size(t_valid_map *valid_map);
 int						table_size(char **str);
 void					error(t_map *map);
 void    				table_clean(char **table);
+int     				**create_matrix(int len);
 
 /*
 ** -------------------------- Algo Functions ------------------------------
 */
 
 void					rooms_to_index(t_map *map);
-void    				adjacency_matrix(t_map *map, int len);
+void    				adjacency_matrix(t_map *map);
+
 
 
 

@@ -13,16 +13,19 @@
 NAME = lem-in
 FLAGS = -Wall -Wextra -Werror
 LIB = libftprintf.a
-SRC = lem_in.c auxiliary.c validation.c deep_validation.c data_collection.c algo_prepare.c
+SRC = lem_in.c auxiliary.c validation.c deep_validation.c data_collection.c algo_prepare.c queue.c
+HEADERS = ./lem_in.h
 OBJ = $(SRC:.c=.o)
 all: $(NAME)
+
+
 
 $(NAME): $(OBJ)
 	@ echo "-----------------------------------"
 	@ echo "lem-in is ready to work"
 	@ cd ./libft && make && mv $(LIB) ..
 	@ gcc $(OBJ) $(LIB) $(FLAGS) -o $(NAME)
-%.o: %.c
+%.o: %.c $(HEADERS)
 	@ gcc $(FLAGS) -c $<
 clean:
 	@ echo "-----------------------------------"

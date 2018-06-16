@@ -88,7 +88,7 @@ int		main(void)
 {
 	t_map 	map;
 
-	map = (t_map){0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL};
+	map = (t_map){0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 	while (get_next_line(0, &(map.str)))
 	{
 		line_analyzer(&map);
@@ -97,22 +97,8 @@ int		main(void)
 	if (map.links_end == 0 || map.links_start == 0)
 		error(&map);
 	adjacency_matrix(&map);
-	int i = 0;
-	int	j = 0;
-    while (i < map.mat_len)
-    {
-        j = 0;
-        while (j < map.mat_len)
-        {
-            printf("%d", map.mat[i][j]);
-            j++;
-        }
-        printf("\n");
-        i++;
-    }
-	// here
-	if (map.valid_map)
-		printf("Ok\n");
+	shortest_way(&map);
+
 	// while (map.rooms)
 	// {
 	// 	printf("name: %s\n", map.rooms->room_name);

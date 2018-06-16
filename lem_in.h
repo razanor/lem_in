@@ -29,6 +29,8 @@ typedef struct			s_map
 	short				mat_len;
 	char				*str;
 	int					**mat;
+	int					*visited;
+	int					*queue;
 	struct s_rooms		*rooms;
 	struct s_links		*links;
 	struct s_valid_map	*valid_map;
@@ -40,6 +42,7 @@ typedef struct			s_rooms
 	int					room_index;
 	short				is_start;
 	short				is_end;
+	short				prev;
 	short				x;
 	short				y;
 	struct s_rooms		*next;
@@ -59,6 +62,14 @@ typedef struct			s_valid_map
 	char				*map;
 	struct s_valid_map	*next;
 }						t_valid_map;
+
+typedef struct			s_queue
+{
+	int					front;
+	int					rear;
+	int					start;
+	int					end;
+}						t_queue;
 
 /*
 ** -------------------------- Validation Functions ----------------------------
@@ -86,6 +97,7 @@ int						table_size(char **str);
 void					error(t_map *map);
 void    				table_clean(char **table);
 int     				**create_matrix(int len);
+int     				*init_array(int *visited, int len, char flag);
 
 /*
 ** -------------------------- Algo Functions ------------------------------
@@ -93,8 +105,6 @@ int     				**create_matrix(int len);
 
 void					rooms_to_index(t_map *map);
 void    				adjacency_matrix(t_map *map);
-
-
-
+void    				shortest_way(t_map *map);
 
 #endif

@@ -71,3 +71,16 @@ int     **create_matrix(int len)
     return (mat);
 }
 
+int     *init_array(int *visited, int len, char flag)
+{
+    int i;
+
+    i = 0;
+    visited = (int *)malloc(sizeof(int) * len);
+    while (i < len)
+    if (flag == '0')
+        visited[i++] = 0;
+    else if (flag == '-')
+        visited[i++] = -1;
+    return (visited);
+}

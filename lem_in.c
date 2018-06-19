@@ -68,19 +68,13 @@ void	error(t_map *map)
 
 void	enough_data_check(t_links **links, t_map *map)
 {
-	t_links *tmp;
-
-	tmp = *links;
-		while (tmp)
-		{
-			printf("%s", tmp->from);
-			printf("-");
-			printf("%s\n", tmp->to);
-			tmp = tmp->next;
-		}
 		if (!(*links))
 			error(map);
-		printf("Here will be logic soon!\n");
+		else
+		{
+			adjacency_matrix(map);
+			shortest_way(map);
+		}
 	exit (1);
 }
 

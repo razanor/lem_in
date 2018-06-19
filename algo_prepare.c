@@ -78,26 +78,138 @@ static void add_path(int room, t_list **lst)
     }
 }
 
-static void path_output(t_map *map, t_list **lst)
+static void put_rooms_name(t_list **lst, t_rooms *rooms)
 {
     t_list *tmp;
-    int     i;
-    int     j;
-    map = NULL;
-    j = 0;
-    i = 1;
-    tmp = *lst;
-    tmp = tmp->next;
-    while (tmp)
-    {
-        (j++) ? ft_printf("\n") : 0;
-        ft_printf("L%d-%d", i, tmp->content_size);
-        tmp = tmp->next;
-    }
-    // here
 
+    while (rooms)
+    {
+        tmp = *lst;
+        while (tmp)
+        {
+            if (rooms->room_index == (int)tmp->content_size)
+                tmp->content = ft_strdup(rooms->room_name);
+            tmp = tmp->next;
+        }  
+        rooms = rooms->next; 
+    }
 }
 
+// static void set_flags_to_zero(t_list **lst)
+// {
+//     t_list *tmp;
+
+//     tmp = *lst;
+//     while (tmp)
+//     {
+//         tmp->flag = 0;
+//         tmp = tmp->next;
+//     }
+// }
+
+// static int check_if_one(t_list **lst)
+// {
+//     t_list *tmp;
+
+//     tmp = *lst;
+//     while (tmp)
+//     {
+//         if (tmp->flag == 1)
+//             return (1);
+//         tmp = tmp->next;
+//     }
+//     return (0);
+// }
+
+static void ft_print_lem(int ant, int ind, t_list *lst, int size)
+{
+    int i;
+
+    i = ind ? size - ind : size - 1 ;
+    // printf("%d%d%d\n", i,size,ind);
+    while (--i)
+        lst = lst->next;
+    ft_printf("L%d-%s ", ant, lst->content);
+}
+
+static int  ft_lst_size(t_list *lst)
+{
+    int i;
+
+    i = 0;
+    while (lst)
+    {
+        lst = lst->next;
+        i++;
+    }
+    return (i);
+}
+
+static void ft_shift(int ant, int *arr, int all_ant, int len)
+{
+    int i;
+
+    i = 0;
+    while (i < len - 1)
+    {
+        arr[i] = arr[i + 1];
+        // printf("T%d ", ant);     
+        i++;
+    }
+    // printf("%d\n", i);       
+    if (ant < all_ant)
+        arr[i] =  ant + 1;
+    else
+        arr[i] = 0;
+    // i = 0;
+    // while (i < 4)
+    // {
+    //     printf("G%d ", arr[i++]);
+    // }
+    // printf("\n");
+}
+
+static int ft_zero(int *arr,int len)
+{
+    int i;
+
+    i = -1;
+    while(++i < len)
+        if (arr[i])
+            return (1);
+    return (0);        
+}
+
+static void path_output(t_map *map, t_list **lst)
+{
+    int len = ft_lst_size(*lst);
+    int arr[len];
+    ft_bzero(arr, len * 4);
+    int     i;
+    int     j;
+
+    i = 1;
+    arr[len - 1] = 1;
+    *lst = (*lst)->next;
+    put_rooms_name(lst, map->rooms);
+    while (ft_zero(arr, len))
+    {
+        j = 0;
+        while (j < len)
+        {     
+            if (arr[j] && j)
+                ft_print_lem(arr[j], j, *lst, len);
+            j++;
+        }
+        ft_shift(i, arr, map->ants, len);
+        if (ft_zero(arr, len) && map->mat_len != 2)
+            ft_printf("\n");        
+        i++;
+    }
+    if (map->mat_len == 2)
+        ft_printf("\n");
+}
+ 
 static void final_output(t_map *map, t_list **lst)
 {
     t_valid_map *tmp;
@@ -125,14 +237,15 @@ static void  get_path(t_map *map, t_queue *p, int k)
     if (map->visited[p->end] != -1)
     {
         add_path(k, &lst);
-        add_path(map->visited[p->end], &lst);
+        if (map->mat_len != 2)
+            add_path(map->visited[p->end], &lst);
         m = 0;
         end = map->visited[p->end];
         while (m < map->mat_len)
         {
             if (m == end)
             {
-                add_path(map->visited[m], &lst);
+                add_path(map->visited[m], &lst); //  кімнату старту не потрібно в найкоротшому шляху
                 end = map->visited[m];
                 m = 0;
             }
@@ -177,7 +290,7 @@ void    shortest_way(t_map *map)
             k++;
         }
     }
-     ft_printf ("\n");
+     error(map);
     // int i = 0;
 	// int	j = 0;
     // while (i < map->mat_len)

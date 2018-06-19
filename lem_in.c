@@ -14,14 +14,13 @@
 
 void	enough_data_check(t_links **links, t_map *map)
 {
-		if (!(*links))
-			free_all(map, 'e');
-		else
-		{
-			adjacency_matrix(map);
-			shortest_way(map);
-		}
-	exit (1);
+	if (!(*links))
+		free_all(map, 'e');
+	else
+	{
+		adjacency_matrix(map);
+		shortest_way(map);
+	}
 }
 
 int		main(void)

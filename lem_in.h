@@ -94,7 +94,6 @@ void					collect_links(char *str, t_links **links);
 
 int 					ft_zero(int *arr,int len);
 int  					ft_lst_size(t_list *lst);
-int						table_size(char **str);
 void					free_all(t_map *map, char flag);
 void    				table_clean(char **table);
 int     				**create_matrix(int len);

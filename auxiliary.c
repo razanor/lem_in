@@ -48,16 +48,6 @@ void    table_clean(char **table)
 	}
 	free(table);
 }
-
-int     table_size(char **str)
-{
-    int i;
-
-    i = 0;
-    while(str[i])
-        i++;
-    return (i);
-}
  
 int     **create_matrix(int len)
 {

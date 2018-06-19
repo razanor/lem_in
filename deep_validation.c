@@ -34,6 +34,24 @@ void	unique_rooms(t_rooms **rooms, t_map *map)
 	}
 }
 
+static void	check_rooms(t_rooms *rooms, char **table, int *s, int *e)
+{
+	if (rooms->is_start == 1 && (!strcmp(table[0], rooms->room_name)
+		|| !strcmp(table[1], rooms->room_name)))
+			(*s)++;
+	if (rooms->is_end == 1 && (!strcmp(table[0], rooms->room_name)
+		|| !strcmp(table[1], rooms->room_name)))
+			(*e)++;
+}
+
+static void same_rooms(t_rooms *rooms, char **table, int *flag)
+{
+	if (strcmp(rooms->room_name, table[0]) == 0)
+		(*flag)++;
+	if (strcmp(rooms->room_name, table[1]) == 0)
+		(*flag)++;
+}
+
 _Bool	is_rooms(char *str, t_rooms *rooms, int *s, int *e)
 {
 	char	**table;
@@ -48,16 +66,8 @@ _Bool	is_rooms(char *str, t_rooms *rooms, int *s, int *e)
 	}
 	while (rooms && table[0] && table[1])
 	{
-		if (rooms->is_start == 1 && (!strcmp(table[0], rooms->room_name)
-		|| !strcmp(table[1], rooms->room_name)))
-			(*s)++;
-		if (rooms->is_end == 1 && (!strcmp(table[0], rooms->room_name)
-		|| !strcmp(table[1], rooms->room_name)))
-			(*e)++;
-		if (strcmp(rooms->room_name, table[0]) == 0)
-			flag++;
-		if (strcmp(rooms->room_name, table[1]) == 0)
-			flag++;
+		check_rooms(rooms, table, s, e);
+		same_rooms(rooms, table, &flag);
 		rooms = rooms->next;
 	}
 	if (flag == 2)

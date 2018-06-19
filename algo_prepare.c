@@ -46,6 +46,17 @@ void    adjacency_matrix(t_map *map)
     initialized_matrix(map->mat, map->links);
 }
  
+static void  intit_variables(t_map *map, t_queue *params)
+{
+    map->visited = init_array(map->visited, map->mat_len, '-');
+    map->queue = init_array(map->queue, map->mat_len, '0');
+    params->start = start_end_node(map->rooms, 's');
+    params->end = start_end_node(map->rooms, 'e'); 
+    map->visited[params->start] = __INT_MAX__;
+    map->queue[params->rear] = params->start; 
+    params->rear++; 
+}
+
 void    shortest_way(t_map *map)
 {
     t_queue params;
@@ -53,33 +64,20 @@ void    shortest_way(t_map *map)
     int k;
 
     params = (t_queue){0, 0, 0, 0};
-    map->visited = init_array(map->visited, map->mat_len, '-');
-    map->queue = init_array(map->queue, map->mat_len, '0');
-    params.start = start_end_node(map->rooms, 's');
-    params.end = start_end_node(map->rooms, 'e'); 
-    map->visited[params.start] = __INT_MAX__; // make vertex start visited
-    map->queue[params.rear] = params.start; // enqueue vertex start
-    params.rear++; 
-    while (params.rear != params.front) // condinion for empty queue
+    intit_variables(map, &params);
+    while (params.rear != params.front)
     {
-        // dequeue
         d = map->queue[params.front];
-        // if (d == params.end)
-        //     break ;
         params.front++;
-        // check adjacent nodes from dequeue node
         k = 0;
         while (k < map->mat_len)
         {
-            // if there is adjacent vertex enqueue it
             if (map->visited[k] == -1 && map->mat[d][k])
             {
                 map->queue[params.rear] = k;
                 params.rear++;
                 map->visited[k] = d;
                 get_path(map, &params, k);
-                // if (k == params.end)
-                //     break ;
             }
             k++;
         }

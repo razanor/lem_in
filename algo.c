@@ -58,6 +58,16 @@ static void final_output(t_map *map, t_list **lst)
     path_output(map, lst);
 }
 
+static void find_links(int *m, int *end, t_map *map, t_list **lst)
+{
+    if (*m == *end)
+    {
+        add_path(map->visited[*m], lst);
+        *end = map->visited[*m];
+        *m = 0;
+    }
+}
+
 void  get_path(t_map *map, t_queue *p, int k)
 {
     int m;
@@ -76,23 +86,10 @@ void  get_path(t_map *map, t_queue *p, int k)
         end = map->visited[p->end];
         while (m < map->mat_len)
         {
-            if (m == end)
-            {
-                add_path(map->visited[m], &lst);
-                end = map->visited[m];
-                m = 0;
-            }
+            find_links(&m, &end, map, &lst);
             m++;
         }
-        // ft_printf("pointer: %p\n", lst);
-        // while (lst)
-        // {
-        //     ft_printf("%d\n", lst->content_size);
-        //     lst = lst->next;
-        // }
-        // exit(1);
         final_output(map, &lst);
-        // clean_lst(&lst);
         free_all(map, ' ');
         exit(1);
     }

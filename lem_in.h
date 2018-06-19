@@ -18,15 +18,15 @@
 
 typedef struct			s_map
 {
-	short				ants;
-	short				rooms_flag;
-	short				com_start_flag;
-	short				com_end_flag;
-	short				start_flag;
-	short				end_flag;
-	short				links_end;
-	short				links_start;
-	short				mat_len;
+	int				ants;
+	int				rooms_flag;
+	int				com_start_flag;
+	int				com_end_flag;
+	int				start_flag;
+	int				end_flag;
+	int				links_end;
+	int				links_start;
+	int				mat_len;
 	char				*str;
 	int					**mat;
 	int					*visited;
@@ -40,11 +40,11 @@ typedef struct			s_rooms
 {
 	char				*room_name;
 	int					room_index;
-	short				is_start;
-	short				is_end;
-	short				prev;
-	short				x;
-	short				y;
+	int				is_start;
+	int				is_end;
+	int				prev;
+	int				x;
+	int				y;
 	struct s_rooms		*next;
 }						t_rooms;
 
@@ -78,7 +78,7 @@ typedef struct			s_queue
 void					line_analyzer(t_map *map);
 void					enough_data_check(t_links **links, t_map *map);
 void					unique_rooms(t_rooms **rooms, t_map *map);
-_Bool					is_rooms(char *str, t_rooms *rooms, short *s, short *e);
+_Bool					is_rooms(char *str, t_rooms *rooms, int *s, int *e);
 
 /*
 ** -------------------------- Data collection Functions -----------------------
@@ -92,9 +92,10 @@ void					collect_links(char *str, t_links **links);
 ** -------------------------- Auxiliary Functions ------------------------------
 */
 
-int						list_size(t_valid_map *valid_map);
+int 					ft_zero(int *arr,int len);
+int  					ft_lst_size(t_list *lst);
 int						table_size(char **str);
-void					error(t_map *map);
+void					free_all(t_map *map, char flag);
 void    				table_clean(char **table);
 int     				**create_matrix(int len);
 int     				*init_array(int *visited, int len, char flag);
@@ -106,5 +107,8 @@ int     				*init_array(int *visited, int len, char flag);
 void					rooms_to_index(t_map *map);
 void    				adjacency_matrix(t_map *map);
 void    				shortest_way(t_map *map);
+int 					start_end_node(t_rooms *rooms, char flag);
+void  					get_path(t_map *map, t_queue *p, int k);
+void 					path_output(t_map *map, t_list **lst);
 
 #endif

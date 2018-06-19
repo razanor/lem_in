@@ -19,7 +19,7 @@ void	unique_rooms(t_rooms **rooms, t_map *map)
 
 	tmp2 = *rooms;
 	if (tmp2->x < 0 || tmp2->y < 0)
-		error(map);
+		free_all(map, 'e');
 	while (tmp2)
 	{
 		tmp = tmp2->next;
@@ -27,14 +27,14 @@ void	unique_rooms(t_rooms **rooms, t_map *map)
 		{
 			if ((strcmp(tmp2->room_name, tmp->room_name)) == 0 || (tmp2->x ==
 			tmp->x && tmp2->y == tmp->y) || (tmp2->x < 0 || tmp2->y < 0))
-				error(map);
+				free_all(map, 'e');
 			tmp = tmp->next;
 		}
 		tmp2 = tmp2->next;
 	}
 }
 
-_Bool	is_rooms(char *str, t_rooms *rooms, short *s, short *e)
+_Bool	is_rooms(char *str, t_rooms *rooms, int *s, int *e)
 {
 	char	**table;
 	int		flag;

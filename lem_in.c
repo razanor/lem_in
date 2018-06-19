@@ -12,64 +12,10 @@
 
 #include "lem_in.h"
 
-static	void	rooms_clean(t_rooms **rooms)
-{
-	t_rooms *tmp;
-
-	while (*rooms)
-	{
-		ft_strdel(&((*rooms)->room_name));
-		tmp = *rooms;
-		*rooms = (*rooms)->next;
-		free(tmp);
-	}
-}
-
-static	void	map_clean(t_valid_map **valid_map)
-{
-	t_valid_map *tmp;
-
-	while (*valid_map)
-	{
-		ft_strdel(&((*valid_map)->map));
-		tmp = *valid_map;
-		*valid_map = (*valid_map)->next;
-		free(tmp);
-	}
-}
-
-static	void	links_clean(t_links **links)
-{
-	t_links *tmp;
-
-	while (*links)
-	{
-		ft_strdel(&((*links)->from));
-		ft_strdel(&((*links)->to));
-		tmp = *links;
-		*links = (*links)->next;
-		free(tmp);
-	}
-}
-
-void	error(t_map *map) 
-{
-	if (map->str)
-		ft_strdel(&(map->str));
-	if (map->rooms)
-		rooms_clean(&(map->rooms));
-	if (map->links)
-		links_clean(&(map->links));
-	if (map->valid_map)
-		map_clean(&(map->valid_map));
-	ft_printf("ERROR\n");
-	exit(1);
-}	
-
 void	enough_data_check(t_links **links, t_map *map)
 {
 		if (!(*links))
-			error(map);
+			free_all(map, 'e');
 		else
 		{
 			adjacency_matrix(map);
@@ -82,34 +28,16 @@ int		main(void)
 {
 	t_map 	map;
 
-	map = (t_map){0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+	map = (t_map){0, 0, 0, 0, 0, 0, 0, 0, 0, 
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 	while (get_next_line(0, &(map.str)))
 	{
 		line_analyzer(&map);
 		ft_strdel(&(map.str));
 	}
 	if (map.links_end == 0 || map.links_start == 0)
-		error(&map);
+		free_all(&map, 'e');
 	adjacency_matrix(&map);
 	shortest_way(&map);
-
-	// while (map.rooms)
-	// {
-	// 	printf("name: %s\n", map.rooms->room_name);
-	// 	printf("room_index: %d\n", map.rooms->room_index);
-	// 	printf("x: %d\n", map.rooms->x);
-	// 	printf("y: %d\n", map.rooms->y);
-	// 	printf("startFLag: %d\n", map.rooms->is_start);
-	// 	printf("endFlag: %d\n", map.rooms->is_end);
-	// 	map.rooms = map.rooms->next;
-	// }
-	// 	while (map.links)
-	// {
-	// 	printf("%s", map.links->from);
-	// 	printf("-");
-	// 	printf("%s\n", map.links->to);
-	// 	map.links = map.links->next;
-	// }
 	return (0);	
 }
-

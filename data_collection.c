@@ -71,7 +71,7 @@ void			collect_rooms(t_map *map, int start, int end)
 	table = ft_strsplit(map->str, ' ');
 	if (!(atoi(table[1]) >= 0 && (atoi(table[2]) >= 0) && is_digit(table[1])
 	&& is_digit(table[2])))
-		error(map);
+		free_all(map, 'e');
 	if (!(map->rooms))
 	{
 		map->rooms = (t_rooms*)malloc(sizeof(t_rooms));

@@ -12,17 +12,28 @@
 
 #include "lem_in.h"
 
-int     list_size(t_valid_map *valid_map)
+int  ft_lst_size(t_list *lst)
 {
     int i;
 
     i = 0;
-    while (valid_map)
+    while (lst)
     {
-        valid_map = valid_map->next;
+        lst = lst->next;
         i++;
     }
     return (i);
+}
+
+int ft_zero(int *arr,int len)
+{
+    int i;
+
+    i = -1;
+    while(++i < len)
+        if (arr[i])
+            return (1);
+    return (0);        
 }
 
 void    table_clean(char **table)
@@ -60,9 +71,9 @@ int     **create_matrix(int len)
     while (i < len)
     {
         j = 0;
+        mat[i] = (int *)malloc(sizeof(int) * len);
         while (j < len)
         {
-            mat[i] = (int *)malloc(sizeof(int) * len);
             mat[i][j] = 0;
             j++;
         }

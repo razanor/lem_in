@@ -13,11 +13,10 @@
 NAME = lem-in
 FLAGS = -Wall -Wextra -Werror
 LIB = libftprintf.a
-SRC = lem_in.c auxiliary.c validation.c deep_validation.c data_collection.c algo_prepare.c
+SRC = lem_in.c auxiliary.c free.c validation.c deep_validation.c data_collection.c algo_prepare.c algo.c final_output.c
 HEADERS = ./lem_in.h
 OBJ = $(SRC:.c=.o)
 all: $(NAME)
-
 
 
 $(NAME): $(OBJ)

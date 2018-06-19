@@ -52,9 +52,9 @@ static	void	links_clean(t_links **links)
 	}
 }
 
-static void     mat_clean(int **mat, int len)
+static void		mat_clean(int **mat, int len)
 {
-    int i;
+	int i;
 
 	i = 0;
 	while (i < len)
@@ -62,10 +62,10 @@ static void     mat_clean(int **mat, int len)
 		free(mat[i]);
 		i++;
 	}
-    free(mat);
+	free(mat);
 }
 
-void	free_all(t_map *map, char flag) 
+void			free_all(t_map *map, char flag)
 {
 	if (map->str)
 		ft_strdel(&(map->str));
@@ -74,14 +74,14 @@ void	free_all(t_map *map, char flag)
 	if (map->links)
 		links_clean(&(map->links));
 	if (map->valid_map)
-        map_clean(&(map->valid_map));
-    if (map->mat)
-        mat_clean(map->mat, map->mat_len);
-    if (map->visited)
-        free(map->visited);
-    if (map->queue)
-        free(map->queue);
-    if (flag == 'e')
-	    ft_printf("ERROR\n");
+		map_clean(&(map->valid_map));
+	if (map->mat)
+		mat_clean(map->mat, map->mat_len);
+	if (map->visited)
+		free(map->visited);
+	if (map->queue)
+		free(map->queue);
+	if (flag == 'e')
+		ft_printf("ERROR\n");
 	exit(1);
 }

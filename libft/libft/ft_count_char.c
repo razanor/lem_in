@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_count_char(const char *s, int a)
+int	ft_c_char(const char *s, int a)
 {
 	int		i;
 	int		j;
@@ -24,7 +24,6 @@ int	ft_count_char(const char *s, int a)
 		if (s[i] == a)
 			j++;
 		i++;
-	}	
+	}
 	return (j);
 }
-

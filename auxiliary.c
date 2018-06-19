@@ -12,31 +12,31 @@
 
 #include "lem_in.h"
 
-int  ft_lst_size(t_list *lst)
+int		ft_lst_size(t_list *lst)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (lst)
-    {
-        lst = lst->next;
-        i++;
-    }
-    return (i);
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
 
-int ft_zero(int *arr,int len)
+int		ft_zero(int *arr, int len)
 {
-    int i;
+	int i;
 
-    i = -1;
-    while(++i < len)
-        if (arr[i])
-            return (1);
-    return (0);        
+	i = -1;
+	while (++i < len)
+		if (arr[i])
+			return (1);
+	return (0);
 }
 
-void    table_clean(char **table)
+void	table_clean(char **table)
 {
 	int i;
 
@@ -48,40 +48,42 @@ void    table_clean(char **table)
 	}
 	free(table);
 }
- 
-int     **create_matrix(int len)
-{
-    int **mat;
-    int i;
-    int j;
 
-    i = 0;
-    j = 0;
-    mat = (int **)malloc(sizeof(int *) * len);
-    while (i < len)
-    {
-        j = 0;
-        mat[i] = (int *)malloc(sizeof(int) * len);
-        while (j < len)
-        {
-            mat[i][j] = 0;
-            j++;
-        }
-        i++;
-    }
-    return (mat);
+int		**create_matrix(int len)
+{
+	int **mat;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	mat = (int **)malloc(sizeof(int *) * len);
+	while (i < len)
+	{
+		j = 0;
+		mat[i] = (int *)malloc(sizeof(int) * len);
+		while (j < len)
+		{
+			mat[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+	return (mat);
 }
 
-int     *init_array(int *visited, int len, char flag)
+int		*init_array(int *visited, int len, char flag)
 {
-    int i;
+	int i;
 
-    i = 0;
-    visited = (int *)malloc(sizeof(int) * len);
-    while (i < len)
-    if (flag == '0')
-        visited[i++] = 0;
-    else if (flag == '-')
-        visited[i++] = -1;
-    return (visited);
+	i = 0;
+	visited = (int *)malloc(sizeof(int) * len);
+	while (i < len)
+	{
+		if (flag == '0')
+			visited[i++] = 0;
+		else if (flag == '-')
+			visited[i++] = -1;
+	}
+	return (visited);
 }

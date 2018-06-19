@@ -102,6 +102,6 @@ int					ft_base_len(uintmax_t value, unsigned int base);
 char				*ft_itoa_10(intmax_t n);
 int					ft_count_len(intmax_t a);
 int					get_next_line(const int fd, char **line);
-int					ft_count_char(const char *s, int a);
+int					ft_c_char(const char *s, int a);
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-void	unique_rooms(t_rooms **rooms, t_map *map)
+void		unique_rooms(t_rooms **rooms, t_map *map)
 {
 	t_rooms		*tmp;
 	t_rooms		*tmp2;
@@ -38,13 +38,13 @@ static void	check_rooms(t_rooms *rooms, char **table, int *s, int *e)
 {
 	if (rooms->is_start == 1 && (!strcmp(table[0], rooms->room_name)
 		|| !strcmp(table[1], rooms->room_name)))
-			(*s)++;
+		(*s)++;
 	if (rooms->is_end == 1 && (!strcmp(table[0], rooms->room_name)
 		|| !strcmp(table[1], rooms->room_name)))
-			(*e)++;
+		(*e)++;
 }
 
-static void same_rooms(t_rooms *rooms, char **table, int *flag)
+static void	same_rooms(t_rooms *rooms, char **table, int *flag)
 {
 	if (strcmp(rooms->room_name, table[0]) == 0)
 		(*flag)++;
@@ -52,7 +52,7 @@ static void same_rooms(t_rooms *rooms, char **table, int *flag)
 		(*flag)++;
 }
 
-_Bool	is_rooms(char *str, t_rooms *rooms, int *s, int *e)
+_Bool		is_rooms(char *str, t_rooms *rooms, int *s, int *e)
 {
 	char	**table;
 	int		flag;

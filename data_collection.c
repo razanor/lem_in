@@ -60,7 +60,7 @@ static void		collect_rooms2(int s, int end, t_map *map, char **table)
 	tmp->next->y = ft_atoi(table[2]);
 	tmp->next->is_start = s;
 	tmp->next->is_end = end;
-	tmp->next->room_index = tmp->room_index + 1; 
+	tmp->next->room_index = tmp->room_index + 1;
 	tmp->next->next = NULL;
 }
 

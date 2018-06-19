@@ -82,7 +82,7 @@ void			line_analyzer(t_map *map)
 	else if (strcmp(map->str, "##start") == 0)
 		start_validation(map);
 	else if ((ft_count_w(map->str, ' ')) == 3 &&
-	ft_count_char(map->str, ' ') == 2 && *(map->str) != '#'
+	ft_c_char(map->str, ' ') == 2 && *(map->str) != '#'
 	&& *(map->str) != 'L' && map->ants && *(map->str) != '-')
 		rooms_validation(map);
 	else if (strcmp(map->str, "##end") == 0)
@@ -93,8 +93,8 @@ void			line_analyzer(t_map *map)
 		if (map->com_end_flag > 1)
 			free_all(map, 'e');
 	}
-	else if (ft_count_char(map->str, '-') == 1 && !ft_count_char(map->str, ' ')
-	&& map->rooms_flag == 1 && map->com_start_flag == 1 && map->com_end_flag == 1)
+	else if (ft_c_char(map->str, '-') == 1 && !ft_c_char(map->str, ' ') &&
+	map->rooms_flag == 1 && map->com_start_flag == 1 && map->com_end_flag == 1)
 		links_validation(map);
 	else
 		enough_data_check(&(map->links), map);

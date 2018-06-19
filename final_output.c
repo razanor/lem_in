@@ -12,87 +12,90 @@
 
 #include "lem_in.h"
 
-static void put_rooms_name(t_list **lst, t_rooms *rooms)
+static void		put_rooms_name(t_list **lst, t_rooms *rooms)
 {
-    t_list *tmp;
+	t_list *tmp;
 
-    while (rooms)
-    {
-        tmp = *lst;
-        while (tmp)
-        {
-            if (rooms->room_index == (int)tmp->content_size)
-                tmp->content = ft_strdup(rooms->room_name);
-            tmp = tmp->next;
-        }  
-        rooms = rooms->next; 
-    }
+	while (rooms)
+	{
+		tmp = *lst;
+		while (tmp)
+		{
+			if (rooms->room_index == (int)tmp->content_size)
+				tmp->content = ft_strdup(rooms->room_name);
+			tmp = tmp->next;
+		}
+		rooms = rooms->next;
+	}
 }
 
-static void ft_shift(int ant, int *arr, int all_ant, int len)
+static void		ft_shift(int ant, int *arr, int all_ant, int len)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (i < len - 1)
-    {
-        arr[i] = arr[i + 1];     
-        i++;
-    }       
-    if (ant < all_ant)
-        arr[i] =  ant + 1;
-    else
-        arr[i] = 0;
+	i = 0;
+	while (i < len - 1)
+	{
+		arr[i] = arr[i + 1];
+		i++;
+	}
+	if (ant < all_ant)
+		arr[i] = ant + 1;
+	else
+		arr[i] = 0;
 }
 
-static void ft_print_lem(int ant, int ind, t_list *lst, int size)
+static void		ft_print_lem(int ant, int ind, t_list *lst, int size)
 {
-    int i;
+	int i;
 
-    i = ind ? size - ind : size - 1 ;
-    while (--i)
-        lst = lst->next;
-    ft_printf("L%d-%s", ant, lst->content);
-    if (size == 2)
-            ft_printf(" ");
+	i = ind ? size - ind : size - 1;
+	while (--i)
+		lst = lst->next;
+	ft_printf("L%d-%s", ant, lst->content);
+	if (size == 2)
+		ft_printf(" ");
 }
 
-void path_output(t_map *map, t_list **lst)
+static void		initialize(t_map *map, t_list **lst, t_output *out)
 {
-    int len = ft_lst_size(*lst);
-    t_list *t;
-    int arr[len];
-    ft_bzero(arr, len * 4);
-    int     i;
-    int     j;
-    int     space;
+	t_list *t;
 
-    space = 0;
-    i = 1;
-    arr[len - 1] = 1;
-    t = *lst;
-    *lst = (*lst)->next;
-      free(t);
-    put_rooms_name(lst, map->rooms);
-        while (ft_zero(arr, len))
-    {
-        j = 0;
-        while (j < len)
-        {     
-            if (arr[j] && j)
-            {
-                if (space++)
-                    ft_printf(" ");
-                ft_print_lem(arr[j], j, *lst, len);
-            }
-            j++;
-        }
-        space = 0;
-        ft_shift(i, arr, map->ants, len);
-        if (ft_zero(arr, len) && len != 2)
-            ft_printf("\n");
-        i++;
-    }
-    if (len == 2)
-        ft_printf("\n");
+	out->i = 1;
+	out->j = 0;
+	out->space = 0;
+	out->len = ft_lst_size(*lst);
+	t = *lst;
+	*lst = (*lst)->next;
+	free(t);
+	put_rooms_name(lst, map->rooms);
+}
+
+void			path_output(t_map *map, t_list **lst)
+{
+	t_output	out;
+	int			arr[ft_lst_size(*lst)];
+
+	initialize(map, lst, &out);
+	ft_bzero(arr, out.len * 4);
+	arr[out.len - 1] = 1;
+	while (ft_zero(arr, out.len))
+	{
+		out.j = 0;
+		while (out.j < out.len)
+		{
+			if (arr[out.j] && out.j)
+			{
+				out.space++ ? ft_printf(" ") : 0;
+				ft_print_lem(arr[out.j], out.j, *lst, out.len);
+			}
+			out.j++;
+		}
+		out.space = 0;
+		ft_shift(out.i, arr, map->ants, out.len);
+		if (ft_zero(arr, out.len) && out.len != 2)
+			ft_printf("\n");
+		out.i++;
+	}
+	out.len == 2 ? ft_printf("\n") : 0;
 }

@@ -18,15 +18,15 @@
 
 typedef struct			s_map
 {
-	int				ants;
-	int				rooms_flag;
-	int				com_start_flag;
-	int				com_end_flag;
-	int				start_flag;
-	int				end_flag;
-	int				links_end;
-	int				links_start;
-	int				mat_len;
+	int					ants;
+	int					rooms_flag;
+	int					com_start_flag;
+	int					com_end_flag;
+	int					start_flag;
+	int					end_flag;
+	int					links_end;
+	int					links_start;
+	int					mat_len;
 	char				*str;
 	int					**mat;
 	int					*visited;
@@ -40,11 +40,11 @@ typedef struct			s_rooms
 {
 	char				*room_name;
 	int					room_index;
-	int				is_start;
-	int				is_end;
-	int				prev;
-	int				x;
-	int				y;
+	int					is_start;
+	int					is_end;
+	int					prev;
+	int					x;
+	int					y;
 	struct s_rooms		*next;
 }						t_rooms;
 
@@ -71,6 +71,14 @@ typedef struct			s_queue
 	int					end;
 }						t_queue;
 
+typedef struct			s_output
+{
+	int					len;
+	int					i;
+	int					j;
+	int					space;
+}						t_output;
+
 /*
 ** -------------------------- Validation Functions ----------------------------
 */
@@ -92,22 +100,22 @@ void					collect_links(char *str, t_links **links);
 ** -------------------------- Auxiliary Functions ------------------------------
 */
 
-int 					ft_zero(int *arr,int len);
-int  					ft_lst_size(t_list *lst);
+int						ft_zero(int *arr, int len);
+int						ft_lst_size(t_list *lst);
 void					free_all(t_map *map, char flag);
-void    				table_clean(char **table);
-int     				**create_matrix(int len);
-int     				*init_array(int *visited, int len, char flag);
+void					table_clean(char **table);
+int						**create_matrix(int len);
+int						*init_array(int *visited, int len, char flag);
 
 /*
 ** -------------------------- Algo Functions ------------------------------
 */
 
 void					rooms_to_index(t_map *map);
-void    				adjacency_matrix(t_map *map);
-void    				shortest_way(t_map *map);
-int 					start_end_node(t_rooms *rooms, char flag);
-void  					get_path(t_map *map, t_queue *p, int k);
-void 					path_output(t_map *map, t_list **lst);
+void					adjacency_matrix(t_map *map);
+void					shortest_way(t_map *map);
+int						start_end_node(t_rooms *rooms, char flag);
+void					get_path(t_map *map, t_queue *p, int k);
+void					path_output(t_map *map, t_list **lst);
 
 #endif

@@ -25,9 +25,9 @@ void	enough_data_check(t_links **links, t_map *map)
 
 int		main(void)
 {
-	t_map 	map;
+	t_map	map;
 
-	map = (t_map){0, 0, 0, 0, 0, 0, 0, 0, 0, 
+	map = (t_map){0, 0, 0, 0, 0, 0, 0, 0, 0,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 	while (get_next_line(0, &(map.str)))
 	{
@@ -38,5 +38,5 @@ int		main(void)
 		free_all(&map, 'e');
 	adjacency_matrix(&map);
 	shortest_way(&map);
-	return (0);	
+	return (0);
 }

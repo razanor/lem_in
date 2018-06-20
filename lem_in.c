@@ -29,7 +29,7 @@ int		main(void)
 
 	map = (t_map){0, 0, 0, 0, 0, 0, 0, 0, 0,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL};
-	while (get_next_line(0, &(map.str)))
+	while (get_next_line(0, &(map.str)) == 1)
 	{
 		line_analyzer(&map);
 		ft_strdel(&(map.str));

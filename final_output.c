@@ -78,7 +78,15 @@ void			path_output(t_map *map, t_list **lst)
 
 	initialize(map, lst, &out);
 	ft_bzero(arr, out.len * 4);
+	ft_printf("len: %d\n", out.len);
 	arr[out.len - 1] = 1;
+	t_list *tmp;
+	tmp = *lst;
+	while (tmp)
+	{
+		printf ("list data: %d\n", (int)(tmp)->content_size);
+		tmp = tmp->next;
+	}
 	while (ft_zero(arr, out.len))
 	{
 		out.j = 0;

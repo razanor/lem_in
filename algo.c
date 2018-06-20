@@ -79,7 +79,7 @@ void		get_path(t_map *map, t_queue *p, int k)
 	if (map->visited[p->end] != -1)
 	{
 		add_path(k, &lst);
-		if (map->mat_len != 2)
+		if (map->mat_len != 2 && map->visited[p->end] != p->start)
 			add_path(map->visited[p->end], &lst);
 		m = 0;
 		end = map->visited[p->end];
